@@ -21,11 +21,19 @@ main().then(console.log('connection succesful'))
 async function main() {
   await mongoose.connect('mongodb://127.0.0.1:27017/whatsapp');
 }
-
+class expressError extends Error{
+    constructor(status=402,message="some error occured"){
+        super();
+       this.status =status;
+       this.message= message;
+    }
+}
 
 
 app.get('/',(req,res)=>{
+    //throw new expressError(500,"root crashed");
     res.send('root is working')
+
 });
 
 app.get('/chats', async (req,res)=>{
